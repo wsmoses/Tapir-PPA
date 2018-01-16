@@ -1,0 +1,394 @@
+Source: tapir-toolchain
+Section: devel
+Priority: optional
+Maintainer: William S. Moses <deb@wsmoses.com>
+Uploaders: William S. Moses <deb@wsmoses.com>
+Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
+    cmake, perl, libtool, chrpath, texinfo, sharutils, libffi-dev (>= 3.0.9),
+    lsb-release, patchutils, diffstat, xz-utils, python-dev,
+    libedit-dev, libncurses5-dev, python-six, python-sphinx, binutils-dev,
+    libjsoncpp-dev, pkg-config,
+    procps, help2man, zlib1g-dev, libsnappy-dev
+Build-Conflicts: oprofile
+Standards-Version: 4.1.1
+Homepage: http://github.com/wsmoses/Tapir-LLVM
+Vcs-Browser: https://github.com/wsmoses/Tapir-LLVM
+
+# ------------- clang -------------
+
+Package: tapirclang-5.0
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+ ${dep:devlibs-objc}, libtapirclang-common-5.0-dev (= ${binary:Version}),
+ libtapirclang-5.0 (= ${binary:Version}), libc6-dev, binutils
+Provides: c-compiler, objc-compiler, c++-compiler, clang-5.0
+Conflicts: clang-5.0
+Replaces: clang-5.0
+Recommends: llvm-5.0-dev, python, libomp-dev, libcilkrts5
+Suggests: gnustep, gnustep-devel, clang-5.0-doc
+Description: C, C++ and Objective-C compiler
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
+ provides most of the support of C++17.
+
+Package: tapirclang-format-5.0
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python,
+ libtapirllvm5.0 (= ${binary:Version})
+Provides: clang-format-5.0
+Conflicts: clang-format-5.0
+Replaces: clang-format-5.0
+Description: Tool to format C/C++/Obj-C code
+ Clang-format is both a library and a stand-alone tool with the goal of
+ automatically reformatting C++ sources files according to configurable
+ style guides. To do so, clang-format uses Clang's Lexer to transform an
+ input file into a token stream and then changes all the whitespace around
+ those tokens. The goal is for clang-format to both serve both as a user
+ tool (ideally with powerful IDE integrations) and part of other
+ refactoring tools, e.g. to do a reformatting of all the lines changed
+ during a renaming.
+ .
+ This package also provides vim and emacs plugins.
+
+Package: tapirclang-5.0-doc
+Architecture: all
+Section: doc
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: clang-5.0-doc
+Conflicts: clang-5.0-doc
+Replaces: clang-5.0-doc
+Description: C, C++ and Objective-C compiler - Documentation
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
+ provides most of the support of C++17.
+ .
+ This package contains the documentation.
+
+Package: libtapirclang-5.0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Provides: libclang-5.0
+Conflicts: libclang-5.0
+Replaces: libclang-5.0
+Multi-Arch: same
+Description: C interface to the clang library
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
+ provides most of the support of C++17.
+ .
+ This package contains the clang library.
+ .
+ The C Interface to Clang provides a relatively small API that exposes
+ facilities for parsing source code into an abstract syntax tree (AST),
+ loading already-parsed ASTs, traversing the AST, associating physical source
+ locations with elements within the AST, and other facilities that support
+ Clang-based development tools.
+
+Package: libtapirclang-5.0-dbg
+Architecture: any
+Multi-Arch: same
+Section: debug
+Priority: optional
+Provides: libclang-5.0-dbg
+Conflicts: libclang-5.0-dbg
+Replaces: libclang-5.0-dbg
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libtapirclang-5.0 (= ${binary:Version})
+Description: clang library (debug)
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
+ provides most of the support of C++17.
+ .
+ This package contains the debugging symbols.
+
+Package: libtapirclang-5.0-dev
+Architecture: any
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
+ ${dep:devlibs-objc}, libtapirclang-5.0 (= ${binary:Version}),
+ libtapirclang-common-5.0-dev (= ${binary:Version})
+Provides: libclang-5.0-dev
+Conflicts: libclang-5.0-dev
+Replaces: libclang-5.0-dev
+Description: clang library - Development package
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
+ provides most of the support of C++17.
+ .
+ This package contains the clang headers to develop extensions over
+ libclang-5.0.
+
+Package: libtapirclang-common-5.0-dev
+Architecture: any
+Section: libdevel
+Provides: libclang-5.0-dbg
+Conflicts: libclang-5.0-dbg
+Replaces: libclang-5.0-dbg
+Depends: ${shlibs:Depends}, ${misc:Depends}, libtapirllvm5.0 (= ${binary:Version})
+Description: clang library - Common development package
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
+ provides most of the support of C++17.
+ .
+ This package contains the clang generic headers and some libraries
+ (profiling, etc).
+
+
+Package: libtapirfuzzer-5.0-dev
+Architecture: linux-any
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}, tapirclang-5.0 (= ${binary:Version})
+Provides: libfuzzer-5.0-dev
+Conflicts: libfuzzer-5.0-dev
+Replaces: libfuzzer-5.0-dev
+Description: Library for coverage-guided fuzz testing
+ LibFuzzer is a library for in-process, coverage-guided, evolutionary fuzzing
+ of other libraries.
+ .
+ LibFuzzer is similar in concept to American Fuzzy Lop (AFL), but it performs
+ all of its fuzzing inside a single process. This in-process fuzzing can be
+ more restrictive and fragile, but is potentially much faster as there is no
+ overhead for process start-up.
+ .
+ The fuzzer is linked with the library under test, and feeds fuzzed inputs to
+ the library via a specific fuzzing entrypoint (aka 'target function'); the
+ fuzzer then tracks which areas of the code are reached, and generates mutations
+ on the corpus of input data in order to maximize the code coverage. The code
+ coverage information for libFuzzer is provided by LLVM's SanitizerCoverage
+ instrumentation.
+
+
+Package: python-tapirclang-5.0
+Section: python
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Replaces: python-clang-3.8, python-clang-3.9, python-clang-x.y, python-clang-5.0
+Breaks: python-clang-3.8, python-clang-3.9
+Conflicts: python-clang-x.y, python-clang-5.0
+Provides: python-clang-x.y, python-clang-5.0
+Description: Clang Python Bindings
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
+ provides most of the support of C++17.
+ .
+ This binding package provides access to the Clang compiler and libraries.
+
+
+Package: tapirclang-5.0-examples
+Architecture: any
+Section: doc
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: clang-5.0-examples
+Replaces: clang-5.0-examples
+Conflicts: clang-5.0-examples
+Description: Clang examples
+ Clang project is a C, C++, Objective C and Objective C++ front-end
+ based on the LLVM compiler. Its goal is to offer a replacement to the
+ GNU Compiler Collection (GCC).
+ .
+ Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
+ provides most of the support of C++17.
+ .
+ This package contains the clang examples.
+
+# ------------- LLVM -------------
+
+Package: libtapirllvm5.0
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Breaks: libllvm3.9v4
+Replaces: libllvm3.9v4, libllvm5.0
+Provides: libllvm5.0
+Conflicts: libllvm5.0
+Description: Modular compiler and toolchain technologies, runtime library
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ This package contains the LLVM runtime library.
+
+Package: libtapirllvm5.0-dbg
+Architecture: any
+Section: debug
+Priority: optional
+Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version})
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Breaks: libllvm3.9v4-dbg
+Replaces: libllvm3.9v4-dbg, libllvm5.0-dbg
+Conflicts: libllvm5.0-dbg
+Provides: libllvm5.0-dbg
+Description: Modular compiler and toolchain technologies, debugging libraries
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ This package contains the LLVM runtime library debug symbols.
+
+Package: tapirllvm-5.0
+Architecture: any
+Suggests: tapirllvm-5.0-doc
+Depends: tapirllvm-5.0-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Recommends: tapirllvm-5.0-dev
+Provides: llvm-5.0
+Replaces: llvm-5.0
+Conflicts: llvm-5.0
+Description: Modular compiler and toolchain technologies
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
+ as an offline code representation (to communicate code between
+ compiler phases and to run-time systems) and as the compiler internal
+ representation (to analyze and transform programs). This persistent
+ code representation allows a common set of sophisticated compiler
+ techniques to be applied at compile-time, link-time, install-time,
+ run-time, or "idle-time" (between program runs).
+ .
+ The strengths of the LLVM infrastructure are its extremely
+ simple design (which makes it easy to understand and use),
+ source-language independence, powerful mid-level optimizer, automated
+ compiler debugging support, extensibility, and its stability and
+ reliability. LLVM is currently being used to host a wide variety of
+ academic research projects and commercial projects. LLVM includes C
+ and C++ front-ends, a front-end for a Forth-like language (Stacker),
+ a young scheme front-end, and Java support is in development. LLVM can
+ generate code for X86, SparcV9, PowerPC or many other architectures.
+
+Package: tapirllvm-5.0-runtime
+Architecture: any
+Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
+Provides: llvm-5.0-runtime
+Conflicts: llvm-5.0-runtime
+Replaces: llvm-5.0-runtime
+Description: Modular compiler and toolchain technologies, IR interpreter
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
+ as an offline code representation (to communicate code between
+ compiler phases and to run-time systems) and as the compiler internal
+ representation (to analyze and transform programs). This persistent
+ code representation allows a common set of sophisticated compiler
+ techniques to be applied at compile-time, link-time, install-time,
+ run-time, or "idle-time" (between program runs).
+ .
+ This package provides the minimal required to execute programs in LLVM
+ format.
+
+Package: tapirllvm-5.0-dev
+Architecture: any
+Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
+ tapirllvm-5.0 (= ${binary:Version}), libtapirllvm5.0 (= ${binary:Version}), libtinfo-dev
+Provides: llvm-5.0-dev
+Replaces: llvm-5.0-dev
+Conflicts: llvm-5.0-dev
+Description: Modular compiler and toolchain technologies, libraries and headers
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
+ as an offline code representation (to communicate code between
+ compiler phases and to run-time systems) and as the compiler internal
+ representation (to analyze and transform programs). This persistent
+ code representation allows a common set of sophisticated compiler
+ techniques to be applied at compile-time, link-time, install-time,
+ run-time, or "idle-time" (between program runs).
+ .
+ This package provides the libraries and headers to develop applications
+ using llvm.
+
+Package: tapirllvm-5.0-tools
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python,
+ tapirllvm-5.0-dev (= ${binary:Version})
+Provides: llvm-5.0-tools
+Replaces: llvm-5.0-tools
+Conflicts: llvm-5.0-tools
+Description: Modular compiler and toolchain technologies, tools
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
+ as an offline code representation (to communicate code between
+ compiler phases and to run-time systems) and as the compiler internal
+ representation (to analyze and transform programs). This persistent
+ code representation allows a common set of sophisticated compiler
+ techniques to be applied at compile-time, link-time, install-time,
+ run-time, or "idle-time" (between program runs).
+ .
+ This package provides tools for testing.
+
+Package: tapirllvm-5.0-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
+Provides: llvm-5.0-doc
+Replaces: llvm-5.0-doc
+Conflicts: llvm-5.0-doc
+Description: Modular compiler and toolchain technologies, documentation
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
+ as an offline code representation (to communicate code between
+ compiler phases and to run-time systems) and as the compiler internal
+ representation (to analyze and transform programs). This persistent
+ code representation allows a common set of sophisticated compiler
+ techniques to be applied at compile-time, link-time, install-time,
+ run-time, or "idle-time" (between program runs).
+ .
+ This package contains all documentation (extensive).
+
+Package: tapirllvm-5.0-examples
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}, tapirllvm-5.0-dev (>= ${source:Version}), tapirllvm-5.0-dev (<< ${source:Version}+c~)
+Provides: llvm-5.0-examples
+Replaces: llvm-5.0-examples
+Conflicts: llvm-5.0-examples
+Description: Modular compiler and toolchain technologies, examples
+ LLVM is a collection of libraries and tools that make it easy to build
+ compilers, optimizers, just-in-time code generators, and many other
+ compiler-related programs.
+ .
+ LLVM uses a single, language-independent virtual instruction set both
+ as an offline code representation (to communicate code between
+ compiler phases and to run-time systems) and as the compiler internal
+ representation (to analyze and transform programs). This persistent
+ code representation allows a common set of sophisticated compiler
+ techniques to be applied at compile-time, link-time, install-time,
+ run-time, or "idle-time" (between program runs).
+ .
+ This package contains examples for using LLVM, both in developing
+ extensions to LLVM and in using it to compile code.
