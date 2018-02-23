@@ -123,6 +123,7 @@ override_dh_prep: build_doc
 	dh_prep
 
 build_doc:
+	mkdir -p $(CURDIR)/docs
 	cd $(CURDIR)/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 	cd $(CURDIR)/clang/docs && make -f Makefile.sphinx && make -f Makefile.sphinx man
 
@@ -241,7 +242,7 @@ override_dh_auto_install:
 # Manage the polly files. Sometimes, we build them. Sometimes not.
 	if test "$(POLLY_ENABLE)" = yes; then \
 		mkdir -p $(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/ $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly/; \
-		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libpolly* \
+		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/libPolly* \
 		$(CURDIR)/debian/libclang-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/lib/; \
 		rm -rf $(CURDIR)/debian/libclang-common-$(LLVM_VERSION)-dev/usr/lib/llvm-$(LLVM_VERSION)/include/polly; \
 		mv -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/include/polly/ \
@@ -258,7 +259,7 @@ override_dh_auto_install:
 
 override_dh_makeshlibs:
 	dh_makeshlibs -plibclang-$(LLVM_VERSION) -V"libclang-$(LLVM_VERSION) (>= 1:5.0~svn298832-1~)"
-	dh_makeshlibs -plibllvm$(LLVM_VERSION) -V"libllvm$(LLVM_VERSION) (>= 1:5.0~svn298832-1~)"
+	dh_makeshlibs -plibLLVM$(LLVM_VERSION) -V"libLLVM$(LLVM_VERSION) (>= 1:5.0~svn298832-1~)"
 	dh_makeshlibs --remaining-packages
 
 override_dh_shlibdeps:

@@ -58,6 +58,7 @@ mkdir -p $SVN_ARCHIVES
 LLVM_TARGET=$FULL_VERSION
 checkout_sources llvm https://github.com/wsmoses/Tapir-LLVM $LLVM_TARGET
 tar jcf $FULL_VERSION.orig.tar.bz2 $LLVM_TARGET
+rm -f $MED_VERSION.orig.tar.bz2
 ln -s $FULL_VERSION.orig.tar.bz2 $MED_VERSION.orig.tar.bz2
 rm -rf $LLVM_TARGET
 
@@ -66,6 +67,7 @@ rm -rf $LLVM_TARGET
 CLANG_TARGET=clang_$VERSION
 checkout_sources clang https://github.com/wsmoses/Tapir-Clang $CLANG_TARGET
 tar jcf $FULL_VERSION.orig-clang.tar.bz2 $CLANG_TARGET
+rm -f $MED_VERSION.orig-clang.tar.bz2
 ln -s $FULL_VERSION.orig-clang.tar.bz2 $MED_VERSION.orig-clang.tar.bz2
 rm -rf $CLANG_TARGET
 
@@ -79,6 +81,7 @@ rm -rf $CLANG_TARGET
 COMPILER_RT_TARGET=compiler-rt_$VERSION
 checkout_sources compiler-rt https://github.com/wsmoses/Tapir-Compiler-RT $COMPILER_RT_TARGET
 tar jcf $FULL_VERSION.orig-compiler-rt.tar.bz2 $COMPILER_RT_TARGET
+rm -f $MED_VERSION.orig-compiler-rt.tar.bz2
 ln -s $FULL_VERSION.orig-compiler-rt.tar.bz2 $MED_VERSION.orig-compiler-rt.tar.bz2
 rm -rf $COMPILER_RT_TARGET
 
@@ -86,6 +89,7 @@ rm -rf $COMPILER_RT_TARGET
 POLLY_TARGET=polly_$VERSION
 checkout_sources polly https://github.com/wsmoses/Tapir-Polly $POLLY_TARGET
 tar jcf $FULL_VERSION.orig-polly.tar.bz2 $POLLY_TARGET
+rm -f $MED_VERSION.orig-polly.tar.bz2
 ln -s $FULL_VERSION.orig-polly.tar.bz2 $MED_VERSION.orig-polly.tar.bz2
 rm -rf $POLLY_TARGET
 
