@@ -128,37 +128,29 @@ for f in clang compiler-rt polly clang-tools-extra lld lldb; do
 	fi
  done
 
-rm tools/clang
+rm -rf tools/clang
 ln -s clang tools/clang
 
-rm projects/compiler-rt
+rm -rf projects/compiler-rt
 ln -s compiler-rt projects/compiler-rt
 
-rm tools/polly
+rm -rftools/polly
 ln -s polly tools/polly
 
-rm tools/clang/tools
-rm tools/clang
+rm -rf tools/clang/tools
 ln -s clang tools/clang
 
-rm projects/compiler-rt
+rm -rf projects/compiler-rt
 ln -s compiler-rt projects/compiler-rt
 
-rm tools/polly
+rm -rf tools/polly
 ln -s polly tools/polly
 
 rm -rf tools/clang/tools
 ln -s clang-tools-extra tools/clang/tools/extra
 
-rm tools/lld
+rm -rf tools/lld
 ln -s lld tools/lld
 
-rm tools/lldb
-ln -s lldb tools/lldb
-
-
-rm tools/lld
-ln -s lld tools/lld
-
-rm tools/lldb
+rm -rf tools/lldb
 ln -s lldb tools/lldb
