@@ -1,0 +1,16 @@
+usr/lib/llvm-5.0/bin/llvm-*
+usr/lib/llvm-5.0/bin/opt*
+usr/lib/llvm-5.0/bin/bugpoint*
+usr/lib/llvm-5.0/bin/llc*
+usr/lib/llvm-5.0/bin/obj2yaml
+usr/lib/llvm-5.0/bin/yaml2obj
+usr/lib/llvm-5.0/bin/verify-uselistorder
+usr/lib/llvm-5.0/bin/sanstats
+usr/bin/llvm-*
+usr/bin/opt*
+usr/bin/bugpoint*
+usr/bin/llc*
+usr/bin/obj2yaml-*
+usr/bin/yaml2obj-*
+usr/bin/verify-uselistorder-*
+usr/bin/sanstats-*

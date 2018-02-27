@@ -1,0 +1,3 @@
+usr/share/clang/scan-build-5.0/bin/scan-build  usr/bin/scan-build-5.0
+usr/share/clang/scan-build-py-5.0/bin/scan-build  usr/bin/scan-build-py-5.0
+usr/share/clang/scan-view-5.0/bin/scan-view    usr/bin/scan-view-5.0

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+if test "$1" = "remove"; then
+    if test -x /usr/sbin/update-binfmts; then
+        update-binfmts --package llvm-5.0-runtime \
+            --remove llvm-5.0-runtime.binfmt /usr/bin/lli-5.0 || true
+        if test -f /var/lib/binfmts/llvm-5.0.binfmt; then
+            # Purge old file
+            update-binfmts --package llvm-5.0-runtime \
+                --remove llvm-5.0.binfmt /usr/bin/lli-5.0 || true
+        fi
+    fi
+fi
+
+#DEBHELPER#
+

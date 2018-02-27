@@ -1,0 +1,7 @@
+usr/lib/llvm-5.0/bin/ld.lld*
+usr/lib/llvm-5.0/bin/lld-*
+usr/lib/llvm-5.0/bin/lld
+
+usr/bin/lld-link-5.0
+usr/bin/ld.lld-5.0
+usr/bin/lld-5.0*

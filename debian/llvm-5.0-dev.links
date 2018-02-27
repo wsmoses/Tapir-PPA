@@ -1,0 +1,19 @@
+usr/lib/x86_64-linux-gnu/libLLVM-5.0.so.1       usr/lib/llvm-5.0/lib/libLLVM-5.0.so
+usr/lib/x86_64-linux-gnu/libLLVM-5.0.so.1       usr/lib/llvm-5.0/lib/libLLVM-5.0.so.1
+usr/lib/x86_64-linux-gnu/libLLVM-5.0.so.1       usr/lib/llvm-5.0/lib/libLLVM-5.0.1.so.1
+usr/lib/x86_64-linux-gnu/libLLVM-5.0.so.1       usr/lib/llvm-5.0/lib/libLLVM-5.0.1.so
+usr/lib/x86_64-linux-gnu/libLLVM-5.0.so.1       usr/lib/x86_64-linux-gnu/libLLVM-5.0.1.so.1
+
+usr/include/llvm-c-5.0/llvm-c usr/lib/llvm-5.0/include/llvm-c
+usr/include/llvm-5.0/llvm usr/lib/llvm-5.0/include/llvm
+usr/include/llvm-c-5.0/llvm-c usr/lib/llvm-5.0/build/include/llvm-c
+usr/include/llvm-5.0/llvm usr/lib/llvm-5.0/build/include/llvm
+
+usr/lib/llvm-5.0/include/ usr/lib/llvm-5.0/build/include
+usr/lib/llvm-5.0/lib/     usr/lib/llvm-5.0/build/lib
+usr/lib/llvm-5.0/share/   usr/lib/llvm-5.0/build/share
+usr/lib/llvm-5.0/ usr/lib/llvm-5.0/build/Release
+usr/lib/llvm-5.0/ usr/lib/llvm-5.0/build/Debug+Asserts
+
+usr/lib/llvm-5.0/lib/cmake/llvm usr/lib/llvm-5.0/cmake
+usr/lib/llvm-5.0/lib/cmake/llvm usr/lib/llvm-5.0/share/llvm/cmake

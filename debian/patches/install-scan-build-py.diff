@@ -1,0 +1,14 @@
+---
+ clang/tools/CMakeLists.txt |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/clang/tools/CMakeLists.txt
++++ b/clang/tools/CMakeLists.txt
+@@ -17,6 +17,7 @@ endif()
+ if(CLANG_ENABLE_STATIC_ANALYZER)
+   add_clang_subdirectory(clang-check)
+   add_clang_subdirectory(scan-build)
++  add_clang_subdirectory(scan-build-py)
+   add_clang_subdirectory(scan-view)
+ endif()
+ 

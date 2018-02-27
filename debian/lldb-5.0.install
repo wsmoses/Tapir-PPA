@@ -1,0 +1,9 @@
+usr/lib/llvm-5.0/bin/lldb*
+usr/lib/llvm-5.0/bin/lldb-mi*
+usr/lib/llvm-5.0/bin/lldb-server*
+usr/lib/llvm-5.0/bin/lldb-argdumper
+
+usr/bin/lldb-5.0*
+usr/bin/lldb-server-5.0*
+usr/bin/lldb-mi-5.0*
+usr/bin/lldb-argdumper-5.0

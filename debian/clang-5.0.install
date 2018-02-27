@@ -1,0 +1,11 @@
+usr/lib/llvm-5.0/bin/clang
+usr/lib/llvm-5.0/bin/clang++
+usr/lib/llvm-5.0/bin/clang-cpp
+
+#usr/share/man/man1/clang.1     usr/share/man/man1/
+usr/lib/llvm-5.0/lib/cmake/clang/*.cmake usr/share/llvm-5.0/cmake/
+usr/lib/llvm-5.0/share/clang/bash-autocomplete.sh
+
+usr/bin/clang-5.0
+usr/bin/clang++-5.0
+usr/bin/clang-cpp-5.0

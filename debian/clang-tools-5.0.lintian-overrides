@@ -1,0 +1,6 @@
+# I know but well...
+clang-tools-5.0: manpage-has-useless-whatis-entry usr/share/man/man1/clang-check.1.gz
+clang-tools-5.0: manpage-has-useless-whatis-entry usr/share/man/man1/scan-view.1.gz
+clang-tools-5.0: manpage-has-useless-whatis-entry usr/share/man/man1/clang-apply-replacements-5.0.1.gz
+clang-tools-5.0: manpage-has-useless-whatis-entry usr/share/man/man1/clang-check-5.0.1.gz
+clang-tools-5.0: manpage-has-useless-whatis-entry usr/share/man/man1/scan-view-5.0.1.gz

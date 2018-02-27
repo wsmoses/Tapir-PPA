@@ -1,0 +1,9 @@
+#usr/lib/llvm-5.0/lib/liblld-5.0.so.1 /usr/lib/x86_64-linux-gnu/
+usr/lib/llvm-5.0/lib/liblldConfig.a
+usr/lib/llvm-5.0/lib/liblldReaderWriter.a
+usr/lib/llvm-5.0/lib/liblldDriver.a
+usr/lib/llvm-5.0/lib/liblldYAML.a
+usr/lib/llvm-5.0/lib/liblldELF.a
+usr/lib/llvm-5.0/lib/liblldCore.a
+usr/lib/llvm-5.0/lib/liblldMachO.a
+usr/lib/llvm-5.0/lib/liblldCOFF.a
