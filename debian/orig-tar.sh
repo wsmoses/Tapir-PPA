@@ -128,29 +128,26 @@ for f in clang compiler-rt polly clang-tools-extra lld lldb; do
 	fi
  done
 
-rm -rf tools/clang
-ln -s clang tools/clang
+rm -rf `pwd`/tools/clang
+ln -s `pwd`/clang `pwd`/tools/clang
 
-rm -rf projects/compiler-rt
-ln -s compiler-rt projects/compiler-rt
+rm -rf `pwd`/projects/compiler-rt
+ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
 
-rm -rftools/polly
-ln -s polly tools/polly
+rm -rf `pwd`/tools/polly
+ln -s `pwd`/polly `pwd`/tools/polly
 
-rm -rf tools/clang/tools
-ln -s clang tools/clang
+rm -rf `pwd`/tools/clang/tools/extra
+ln -s `pwd`/clang-tools-extra `pwd`/tools/clang/tools/extra
 
-rm -rf projects/compiler-rt
-ln -s compiler-rt projects/compiler-rt
+rm -rf `pwd`/projects/compiler-rt
+ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
 
-rm -rf tools/polly
-ln -s polly tools/polly
+rm -rf `pwd`/tools/polly
+ln -s `pwd`/polly `pwd`/tools/polly
 
-rm -rf tools/clang/tools
-ln -s clang-tools-extra tools/clang/tools/extra
+rm -rf `pwd`/tools/lld
+ln -s `pwd`/lld `pwd`/tools/lld
 
-rm -rf tools/lld
-ln -s lld tools/lld
-
-rm -rf tools/lldb
-ln -s lldb tools/lldb
+rm -rf `pwd`/tools/lldb
+ln -s `pwd`/lldb `pwd`/tools/lldb
