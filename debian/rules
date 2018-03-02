@@ -304,7 +304,7 @@ build_doc:
 	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
 	help2man --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
 
-	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib lldb lldb-mi clang-format clang clang++ clang-tblgen clang-check clang-cpp clang-import-test clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler"; \
+	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib clang-format clang clang++ clang-tblgen clang-check clang-cpp clang-import-test clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
 		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
@@ -353,7 +353,7 @@ endif
 	echo "Please visit https://github.com/google/sanitizers/wiki/AddressSanitizer for help" >> $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/clang/$(LLVM_VERSION_FULL)/README.txt
 
 # idem for the lldb python binding
-	mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python2.7/site-packages/lldb/
+	#mkdir -p $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python2.7/site-packages/lldb/
 
 # Remove things that CMake  install but which aren't packaged yet,
 # or are packaged from the source or build tree.
@@ -411,7 +411,7 @@ endif
 	sed -i '/_IMPORT_CHECK_TARGETS \(Polly\|sancov\)/ {s|^|#|}' $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/cmake/llvm/LLVMExports-*.cmake
 
 # Managed in python-lldb-X.Y.links.in
-	rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/_lldb.so
+	#rm -f $(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/_lldb.so
 
 # Manage the polly files. Sometimes, we build them. Sometimes not.
 	if test "$(POLLY_ENABLE)" = yes; then \
@@ -446,7 +446,7 @@ endif
 
 override_dh_makeshlibs:
 	dh_makeshlibs -plibclang$(SONAME_EXT)-$(LLVM_VERSION) -V"libclang$(SONAME_EXT)-$(LLVM_VERSION) (>= 1:5.0~svn298832-1~)"
-	dh_makeshlibs -pliblldb-$(LLVM_VERSION) -V"liblldb-$(LLVM_VERSION) (>= 1:5.0~svn298832-1~)"
+	#dh_makeshlibs -pliblldb-$(LLVM_VERSION) -V"liblldb-$(LLVM_VERSION) (>= 1:5.0~svn298832-1~)"
 	dh_makeshlibs -plibllvm$(LLVM_VERSION) -V"libllvm$(LLVM_VERSION) (>= 1:5.0~svn298832-1~)"
 	dh_makeshlibs --remaining-packages
 
@@ -465,7 +465,7 @@ override_dh_strip:
 	find $(TARGET_BUILD) -name '*.o' -o -name '*.a' | xargs -r rm -f
 	dh_strip -p libclang$(SONAME_EXT)-$(LLVM_VERSION) --dbg-package=libclang$(SONAME_EXT)-$(LLVM_VERSION)-dbg
 	dh_strip -p libllvm$(LLVM_VERSION) --dbg-package=libllvm$(LLVM_VERSION)-dbg
-	dh_strip -p liblldb-$(LLVM_VERSION) --dbg-package=liblldb-$(LLVM_VERSION)-dbg
+	#dh_strip -p liblldb-$(LLVM_VERSION) --dbg-package=liblldb-$(LLVM_VERSION)-dbg
 #ifeq (${LLD_ENABLE},yes)
 #	dh_strip -p liblld-$(LLVM_VERSION) --dbg-package=liblld-$(LLVM_VERSION)-dbg
 #endif
@@ -480,7 +480,7 @@ override_dh_installdeb:
 # Managed by the package
 	dh_installdeb -a
 
-	rm -f $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/__init__.pyc $(CURDIR)/debian/python-lldb-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/__init__.pyc
+	#rm -f $(CURDIR)/debian/tmp/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/__init__.pyc $(CURDIR)/debian/python-lldb-$(LLVM_VERSION)/usr/lib/llvm-$(LLVM_VERSION)/lib/python*/site-packages/lldb/__init__.pyc
 	rm -f $(CURDIR)/debian/clang-$(LLVM_VERSION)-examples/usr/share/doc/clang-$(LLVM_VERSION)-examples/examples/*Make*
 
 # Remove auto generated python pyc
@@ -517,13 +517,13 @@ endif
 ifeq (,$(filter $(DEB_HOST_ARCH), $(LLDB_DISABLE_ARCHS) armhf armel))
 ifneq (,$(filter codecoverage,$(DEB_BUILD_OPTIONS)))
 # Create a symlink to run the testsuite: see https://bugs.archlinux.org/task/50759
-	cd $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/; \
+	#cd $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/; \
 		if test ! -e _lldb.so; then \
 			ln -s lldb/_lldb.so; \
 		fi
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true
+	#LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(CURDIR)/$(TARGET_BUILD)/lib/ $(MAKE) $(NJOBS) -C $(TARGET_BUILD) check-lldb || true
 	# remove the workaround
-	rm $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/_lldb.so
+	#rm $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/_lldb.so
 endif
 endif
 
@@ -533,7 +533,7 @@ ifeq (${POLLY_ENABLE},yes)
 endif
 
 # Managed by debian build system
-	rm -f $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/lldb/_lldb.so
+	#rm -f $(CURDIR)/$(TARGET_BUILD)/lib/python*/site-packages/lldb/_lldb.so
 
 # polly tests
 	if test "$(POLLY_ENABLE)" = yes; then \
@@ -564,10 +564,10 @@ override_dh_auto_clean:
 	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`
 	find utils -name '*.pyc' | xargs -r rm -f
 	# Use -I because a test has a space in its name
-	find lldb/test -iname '*.pyc' | xargs -I{} -r rm -f {}
+	#find lldb/test -iname '*.pyc' | xargs -I{} -r rm -f {}
 	find test -name '*.pyc' -o -name '*.cm[ix]' | xargs -r rm -f
 	find test/Bindings -name '*.o' | xargs -r rm -f
-	rm -f tools/clang tools/polly tools/lld tools/lldb projects/compiler-rt
+	rm -f tools/clang tools/polly tools/lld projects/compiler-rt
 	rm -rf tools/clang/tools/extra clang/tools/extra/
 	rm -f $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)

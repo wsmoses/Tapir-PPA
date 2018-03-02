@@ -104,12 +104,12 @@ ln -s $FULL_VERSION.orig-lld.tar.bz2 $MED_VERSION.orig-lld.tar.bz2
 rm -rf $LLD_TARGET
 
 # LLDB
-LLDB_TARGET=lldb_$VERSION
-checkout_sources lldb https://github.com/llvm-mirror/lldb $LLDB_TARGET $LLVM_VER
-tar jcf $FULL_VERSION.orig-lldb.tar.bz2 $LLDB_TARGET
-rm -f $MED_VERSION.orig-lldb.tar.bz2
-ln -s $FULL_VERSION.orig-lldb.tar.bz2 $MED_VERSION.orig-lldb.tar.bz2
-rm -rf $LLDB_TARGET
+#LLDB_TARGET=lldb_$VERSION
+#checkout_sources lldb https://github.com/llvm-mirror/lldb $LLDB_TARGET $LLVM_VER
+#tar jcf $FULL_VERSION.orig-lldb.tar.bz2 $LLDB_TARGET
+#rm -f $MED_VERSION.orig-lldb.tar.bz2
+#ln -s $FULL_VERSION.orig-lldb.tar.bz2 $MED_VERSION.orig-lldb.tar.bz2
+#rm -rf $LLDB_TARGET
 
 PATH_DEBIAN="$(pwd)/$(dirname $0)/../"
 echo "going into $PATH_DEBIAN"
@@ -121,7 +121,7 @@ cd $dir
 dch --distribution xenial #$EXTRA_DCH_FLAGS --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
 
 tar jxf ../tapir-toolchain_$VERSION.orig.tar.bz2 --strip-components=1
-for f in clang compiler-rt polly clang-tools-extra lld lldb; do
+for f in clang compiler-rt polly clang-tools-extra lld; do
 	if test -e ../tapir-toolchain_$VERSION.orig-$f.tar.bz2; then
 		echo "unpack of $f"
 		mkdir -p $f && tar jxf ../tapir-toolchain_$VERSION.orig-$f.tar.bz2 --strip-components=1 -C $f
@@ -149,5 +149,5 @@ ln -s `pwd`/polly `pwd`/tools/polly
 rm -rf `pwd`/tools/lld
 ln -s `pwd`/lld `pwd`/tools/lld
 
-rm -rf `pwd`/tools/lldb
-ln -s `pwd`/lldb `pwd`/tools/lldb
+#rm -rf `pwd`/tools/lldb
+#ln -s `pwd`/lldb `pwd`/tools/lldb
