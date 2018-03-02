@@ -1,3 +1,0 @@
-lldb-5.0: non-dev-pkg-with-shlib-symlink usr/lib/*/liblldb.so.1 usr/lib/*/liblldb.so
-# Does not really matter
-lldb-5.0: manpage-has-useless-whatis-entry usr/share/man/man1/lldb-5.0.1.gz

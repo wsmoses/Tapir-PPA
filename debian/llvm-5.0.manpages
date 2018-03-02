@@ -1,8 +1,0 @@
-docs/_build/man/*
-debian/man/llvm-dwarfdump-5.0.1
-debian/man/llvm-mc-5.0.1
-debian/man/llvm-mcmarkup-5.0.1
-debian/man/llvm-objdump-5.0.1
-debian/man/llvm-rtdyld-5.0.1
-debian/man/llvm-size-5.0.1
-debian/man/llvm-ranlib-5.0.1

@@ -1,7 +1,0 @@
-usr/lib/llvm-5.0/lib/clang/5.0.1/include usr/include/clang/5.0/include
-usr/lib/llvm-5.0/lib/clang/5.0.1/include usr/lib/clang/5.0/include
-usr/lib/llvm-5.0/lib/clang/5.0.1/lib usr/lib/clang/5.0/lib
-usr/lib/llvm-5.0/lib/clang/5.0.1/include usr/include/clang/5.0.1/include
-usr/lib/llvm-5.0/lib/clang/5.0.1/include usr/lib/clang/5.0.1/include
-usr/lib/llvm-5.0/lib/clang/5.0.1/lib usr/lib/clang/5.0.1/lib
-

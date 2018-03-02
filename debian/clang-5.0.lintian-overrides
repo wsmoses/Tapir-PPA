@@ -1,2 +1,0 @@
-# Does not link otherwise
-clang-5.0: embedded-library usr/lib/llvm-5.0/bin/clang: libjsoncpp

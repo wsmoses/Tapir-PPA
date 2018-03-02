@@ -1,8 +1,0 @@
-usr/lib/llvm-5.0/bin/lli
-usr/lib/llvm-5.0/bin/lli-child-target
-
-usr/bin/lli-5.0
-usr/bin/lli-child-target-5.0
-
-debian/llvm-5.0-runtime.binfmt                  usr/share/binfmts/
-
