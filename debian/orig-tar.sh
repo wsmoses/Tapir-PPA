@@ -122,7 +122,7 @@ dch --distribution xenial #$EXTRA_DCH_FLAGS --distribution $DISTRIBUTION --newve
 
 tar jxf ../$FULL_VERSION.orig.tar.bz2 --strip-components=1
 for f in clang compiler-rt polly clang-tools-extra lld; do
-	if test -e ../tapir-toolchain_$VERSION.orig-$f.tar.bz2; then
+	if test -e ../$FULL_VERSION.orig-$f.tar.bz2; then
 		echo "unpack of $f"
 		mkdir -p $f && tar jxf ../$FULL_VERSION.orig-$f.tar.bz2 --strip-components=1 -C $f
 	fi
