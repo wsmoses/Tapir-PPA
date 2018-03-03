@@ -7,8 +7,8 @@ GXX_VERSIONED_PACKAGE    := $(shell dpkg-query -W -f '$${Depends}' g++ | grep -o
 GXX_VERSIONED_EXECUTABLE := $(shell dpkg -L $(GXX_VERSIONED_PACKAGE) | grep '/usr/bin/g++-[0-9][0-9.]*' | xargs ls -d | tail -n1 )
 GCC_VERSION              := $(subst /usr/bin/g++-,,$(GXX_VERSIONED_EXECUTABLE))
 
-LLVM_VERSION   := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9]+).([0-9]+).*,\1.\2,p")
-LLVM_VERSION_FULL := $(shell dpkg-parsechangelog | sed -rne "s,^Version: 1:([0-9.]+)(~|-)(.*),\1,p")
+LLVM_VERSION   := 5.0
+LLVM_VERSION_FULL := 5.0.1
 ifeq ($(LLVM_VERSION),$(LLVM_VERSION_FULL))
 	LLVM_VERSION_FULL := $(LLVM_VERSION).0
 endif
@@ -296,8 +296,6 @@ build_doc:
 	mkdir -p $(CURDIR)/clang/docs/_build/man && cd $(CURDIR)/clang/docs/_build/man/; mv clang.1 clang-$(LLVM_VERSION).1
 
 # Remove the copy of jquery. See bug #701087
-	for d in $(TARGET_BUILD)/docs/html/_static/ $(TARGET_BUILD)/tools/clang/docs/html/_static/ $(TARGET_BUILD)/tools/clang/tools/extra/docs/html/_static/; do \
-	done
 
 	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
 	help2man --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
