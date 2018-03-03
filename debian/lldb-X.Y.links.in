@@ -1,2 +1,0 @@
-usr/lib/llvm-@LLVM_VERSION@/bin/lldb-server usr/lib/llvm-@LLVM_VERSION@/bin/lldb-server-@LLVM_VERSION_FULL@
-usr/lib/llvm-@LLVM_VERSION@/bin/lldb-server usr/lib/llvm-@LLVM_VERSION@/bin/lldb-server-@LLVM_VERSION@
