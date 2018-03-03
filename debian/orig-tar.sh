@@ -7,9 +7,9 @@ set -o xtrace
 # To create an rc1 release:
 # sh 4.0/debian/orig-tar.sh RELEASE_40 rc1
 
-MAJOR_VERSION=1.0
-CURRENT_VERSION=1.0 # Should be changed to 3.5.1 later
-EXACT_VERSION=0
+MAJOR_VERSION=5.0
+CURRENT_VERSION=5.0 # Should be changed to 3.5.1 later
+EXACT_VERSION=5.0.0
 LLVM_VER="release_50"
 
 if test -n "$1"; then
@@ -48,9 +48,9 @@ checkout_sources() {
     cd ..
 }
 
-VERSION=$MAJOR_VERSION"-"$EXACT_VERSION
-FULL_VERSION="tapir-toolchain_"$VERSION
-MED_VERSION="tapir-toolchain_"$MAJOR_VERSION
+VERSION=$MAJOR_VERSION"_"$EXACT_VERSION
+FULL_VERSION="tapir-toolchain-"$VERSION
+MED_VERSION="tapir-toolchain-"$MAJOR_VERSION
 
 mkdir -p $SVN_ARCHIVES
 
@@ -120,11 +120,11 @@ cd $PATH_DEBIAN
 cd $dir
 dch --distribution xenial #$EXTRA_DCH_FLAGS --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
 
-tar jxf ../tapir-toolchain_$VERSION.orig.tar.bz2 --strip-components=1
+tar jxf ../$FULL_VERSION.orig.tar.bz2 --strip-components=1
 for f in clang compiler-rt polly clang-tools-extra lld; do
 	if test -e ../tapir-toolchain_$VERSION.orig-$f.tar.bz2; then
 		echo "unpack of $f"
-		mkdir -p $f && tar jxf ../tapir-toolchain_$VERSION.orig-$f.tar.bz2 --strip-components=1 -C $f
+		mkdir -p $f && tar jxf ../$FULL_VERSION.orig-$f.tar.bz2 --strip-components=1 -C $f
 	fi
  done
 
