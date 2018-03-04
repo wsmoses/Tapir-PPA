@@ -72,12 +72,12 @@ ln -s $FULL_VERSION.orig-clang.tar.bz2 $MED_VERSION.orig-clang.tar.bz2
 rm -rf $CLANG_TARGET
 
 # Clang extra
-CLANG_TARGET=clang-tools-extra_$VERSION
-checkout_sources clang-tools-extra https://github.com/llvm-mirror/clang-tools-extra $CLANG_TARGET $LLVM_VER
-tar jcf $FULL_VERSION.orig-clang-tools-extra.tar.bz2 $CLANG_TARGET
-rm -f $MED_VERSION.orig-clang-tools-extra.tar.bz2
-ln -s $FULL_VERSION.orig-clang-tools-extra.tar.bz2 $MED_VERSION.orig-clang-tools-extra.tar.bz2
-rm -rf $CLANG_TARGET
+#CLANG_TARGET=clang-tools-extra_$VERSION
+#checkout_sources clang-tools-extra https://github.com/llvm-mirror/clang-tools-extra $CLANG_TARGET $LLVM_VER
+#tar jcf $FULL_VERSION.orig-clang-tools-extra.tar.bz2 $CLANG_TARGET
+#rm -f $MED_VERSION.orig-clang-tools-extra.tar.bz2
+#ln -s $FULL_VERSION.orig-clang-tools-extra.tar.bz2 $MED_VERSION.orig-clang-tools-extra.tar.bz2
+#rm -rf $CLANG_TARGET
 
 # Compiler-rt
 COMPILER_RT_TARGET=compiler-rt_$VERSION
@@ -128,26 +128,26 @@ for f in clang compiler-rt polly lld; do
 	fi
  done
 
-rm -rf `pwd`/tools/clang
-ln -s `pwd`/clang `pwd`/tools/clang
+#rm -rf `pwd`/tools/clang
+#ln -s `pwd`/clang `pwd`/tools/clang
 
-rm -rf `pwd`/projects/compiler-rt
-ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
+#rm -rf `pwd`/projects/compiler-rt
+#ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
 
-rm -rf `pwd`/tools/polly
-ln -s `pwd`/polly `pwd`/tools/polly
+#rm -rf `pwd`/tools/polly
+#ln -s `pwd`/polly `pwd`/tools/polly
 
 #rm -rf `pwd`/tools/clang/tools/extra
 #ln -s `pwd`/clang-tools-extra `pwd`/tools/clang/tools/extra
 
-rm -rf `pwd`/projects/compiler-rt
-ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
+#rm -rf `pwd`/projects/compiler-rt
+#ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
 
-rm -rf `pwd`/tools/polly
-ln -s `pwd`/polly `pwd`/tools/polly
+#rm -rf `pwd`/tools/polly
+#ln -s `pwd`/polly `pwd`/tools/polly
 
-rm -rf `pwd`/tools/lld
-ln -s `pwd`/lld `pwd`/tools/lld
+#rm -rf `pwd`/tools/lld
+#ln -s `pwd`/lld `pwd`/tools/lld
 
 #rm -rf `pwd`/tools/lldb
 #ln -s `pwd`/lldb `pwd`/tools/lldb
