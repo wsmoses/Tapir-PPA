@@ -565,10 +565,10 @@ override_dh_auto_clean:
 	#find lldb/test -iname '*.pyc' | xargs -I{} -r rm -f {}
 	find test -name '*.pyc' -o -name '*.cm[ix]' | xargs -r rm -f
 	find test/Bindings -name '*.o' | xargs -r rm -f
-	if [ -d tools/clang ]; then rmdir tools/clang; fi
-	if [ -d tools/polly ]; then rmdir tools/polly; fi
-	if [ -d tools/lld ]; then rmdir tools/lld; fi
-	if [ -d projects/compiler-rt ]; then rmdir projects/compiler-rt; fi
+	if (! test -L tools/clang) && (test -d tools/clang); then rmdir tools/clang; fi
+	if (! test -L tools/polly) && (test -d tools/polly); then rmdir tools/polly; fi
+	if (! test -L tools/lld)   && (test -d tools/lld); then rmdir tools/lld; fi
+	if (! test -L projects/compiler-rt) && (test -d projects/compiler-rt); then rmdir projects/compiler-rt; fi
 	rm -f tools/clang tools/polly tools/lld projects/compiler-rt
 	#rm -rf tools/clang/tools/extra clang/tools/extra/
 	rm -f $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
