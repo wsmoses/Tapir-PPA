@@ -121,7 +121,7 @@ cd $dir
 dch --distribution xenial #$EXTRA_DCH_FLAGS --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
 
 tar jxf ../$FULL_VERSION.orig.tar.bz2 --strip-components=1
-for f in clang compiler-rt polly clang-tools-extra lld; do
+for f in clang compiler-rt polly lld; do
 	if test -e ../$FULL_VERSION.orig-$f.tar.bz2; then
 		echo "unpack of $f"
 		mkdir -p $f && tar jxf ../$FULL_VERSION.orig-$f.tar.bz2 --strip-components=1 -C $f
@@ -137,8 +137,8 @@ ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
 rm -rf `pwd`/tools/polly
 ln -s `pwd`/polly `pwd`/tools/polly
 
-rm -rf `pwd`/tools/clang/tools/extra
-ln -s `pwd`/clang-tools-extra `pwd`/tools/clang/tools/extra
+#rm -rf `pwd`/tools/clang/tools/extra
+#ln -s `pwd`/clang-tools-extra `pwd`/tools/clang/tools/extra
 
 rm -rf `pwd`/projects/compiler-rt
 ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt

@@ -224,9 +224,9 @@ override_dh_auto_configure: preconfigure
 	fi)
 
 	# Due to bug upstream, no symlink here
-	rm -fr tools/clang/tools/extra
-	mkdir -p tools/clang/tools
-	cp -R -H clang-tools-extra tools/clang/tools/extra
+	#rm -fr tools/clang/tools/extra
+	#mkdir -p tools/clang/tools
+	#cp -R -H clang-tools-extra tools/clang/tools/extra
 
 	echo "Running tests: $(RUN_TEST)"
 
@@ -425,7 +425,7 @@ endif
 	mkdir -p $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/ $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
 	cp -R $(TARGET_BUILD)/docs/html $(CURDIR)/debian/usr/share/doc/llvm-$(LLVM_VERSION)-doc/
 	cp -R $(TARGET_BUILD)/tools/clang/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/
-	cp -R $(TARGET_BUILD)/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/clang-extra
+	#cp -R $(TARGET_BUILD)/tools/clang/tools/extra/docs/html $(CURDIR)/debian/usr/share/doc/clang-$(LLVM_VERSION)-doc/clang-extra
 
 # Rename OCaml bindings
 	if test "$(OCAML_ENABLE)" = yes; then \
@@ -565,8 +565,12 @@ override_dh_auto_clean:
 	#find lldb/test -iname '*.pyc' | xargs -I{} -r rm -f {}
 	find test -name '*.pyc' -o -name '*.cm[ix]' | xargs -r rm -f
 	find test/Bindings -name '*.o' | xargs -r rm -f
+	if [ -d tools/clang ]; then rmdir tools/clang; fi
+	if [ -d tools/polly ]; then rmdir tools/polly; fi
+	if [ -d tools/lld ]; then rmdir tools/lld; fi
+	if [ -d projects/compiler-rt ]; then rmdir projects/compiler-rt; fi
 	rm -f tools/clang tools/polly tools/lld projects/compiler-rt
-	rm -rf tools/clang/tools/extra clang/tools/extra/
+	#rm -rf tools/clang/tools/extra clang/tools/extra/
 	rm -f $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py
