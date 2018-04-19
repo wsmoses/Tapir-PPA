@@ -137,8 +137,8 @@ ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
 rm -rf `pwd`/tools/polly
 ln -s `pwd`/polly `pwd`/tools/polly
 
-rm -rf `pwd`/tools/clang/tools/extra
-ln -s `pwd`/clang-tools-extra `pwd`/tools/clang/tools/extra
+#rm -rf `pwd`/tools/clang/tools/extra
+#ln -s `pwd`/clang-tools-extra `pwd`/tools/clang/tools/extra
 
 rm -rf `pwd`/projects/compiler-rt
 ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
