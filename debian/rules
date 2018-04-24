@@ -556,7 +556,7 @@ override_dh_gencontrol:
 
 
 override_dh_auto_clean:
-	rm -rf $(TARGET_BUILD) tools/clang/include/clang/Debian/debian_path.h docs/_build/ clang/docs/_build tools/clang/docs/_html/
+	rm -rf $(TARGET_BUILD) docs/_build clang/docs/_build
 # QA tools
 	rm -rf cov-int/ reports/
 	rm -f `ls debian/*.in|sed -e "s|.in$$||g"`
@@ -565,8 +565,20 @@ override_dh_auto_clean:
 	#find lldb/test -iname '*.pyc' | xargs -I{} -r rm -f {}
 	find test -name '*.pyc' -o -name '*.cm[ix]' | xargs -r rm -f
 	find test/Bindings -name '*.o' | xargs -r rm -f
-	rm -f tools/clang tools/polly tools/lld projects/compiler-rt
-	rm -rf tools/clang/tools/extra clang/tools/extra/
+	if [ -h tools/clang ]; then echo "tools/clang symlink"; rm tools/clang; fi
+	if [ -h tools/polly ]; then echo "tools/polly symlink"; rm tools/polly; fi
+	if [ -h tools/lld ]; then echo "tools/lld symlink"; rm tools/lld; fi
+	if [ -h projects/compiler-rt ]; then echo "projects/compiler-rt symlink"; rm projects/compiler-rt; fi
+	if [ -h tools/clang/tools/extra ]; then echo "tools/clang/tools/extra symlink"; rm tools/clang/tools/extra; fi
+	if [ -h clang/tools/extra ]; then echo "clang/tools/extra symlink"; rm clang/tools/extra; fi
+	if [ -d tools/clang ] && [ -z "$(shell ls -A tools/clang)" ]; then echo "tools/clang Empty"; rmdir tools/clang; else echo "tools/clang Not Empty"; fi
+	if [ -d tools/polly ] && [ -z "$(shell ls -A tools/polly)" ]; then echo "tools/polly Empty"; rmdir tools/polly; else echo "tools/polly Not Empty"; fi
+	if [ -d tools/lld ] && [ -z "$(shell ls -A tools/lld)" ]; then echo "tools/lld Empty"; rmdir tools/lld; else echo "tools/lld Not Empty"; fi
+	if [ -d projects/compiler-rt ] && [ -z "$(shell ls -A projects/compiler-rt)" ]; then echo "projects/compiler-rt Empty"; rmdir projects/compiler-rt; else echo "projects/compiler-rt Not Empty"; fi
+	if [ -d tools/clang/tools/extra ] && [ -z "$(shell ls -A tools/clang/tools/extra)" ]; then echo "tools/clang/tools/extra Empty"; rmdir tools/clang/tools/extra; else echo "tools/clang/tools/extra Not Empty"; fi
+	if [ -d clang/tools/extra ] && [ -z "$(shell ls -A clang/tools/extra)" ]; then echo "clang/tools/extra Empty"; rmdir clang/tools/extra; else echo "clang/tools/extra Not Empty"; fi
+	rm -rf tools/clang/include/clang/Debian/debian_path.h tools/clang/docs/_html/
+	rm -rf clang/include/clang/Debian/debian_path.h clang/docs/_html/
 	rm -f $(CURDIR)/utils/vim/llvm-$(LLVM_VERSION).vim $(CURDIR)/utils/vim/tablegen-$(LLVM_VERSION).vim
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-diff-$(LLVM_VERSION)
 	rm -f $(CURDIR)/clang/tools/clang-format/clang-format-$(LLVM_VERSION).py

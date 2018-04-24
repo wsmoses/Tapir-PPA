@@ -9,7 +9,7 @@ set -o xtrace
 
 MAJOR_VERSION=5.0
 CURRENT_VERSION=5.0 # Should be changed to 3.5.1 later
-EXACT_VERSION=5.0.0
+EXACT_VERSION=5.0.0_0
 LLVM_VER="release_50"
 
 if test -n "$1"; then
@@ -128,26 +128,26 @@ for f in clang compiler-rt polly clang-tools-extra lld; do
 	fi
  done
 
-rm -rf `pwd`/tools/clang
-ln -s `pwd`/clang `pwd`/tools/clang
+#rm -rf `pwd`/tools/clang
+#ln -s `pwd`/clang `pwd`/tools/clang
 
-rm -rf `pwd`/projects/compiler-rt
-ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
+#rm -rf `pwd`/projects/compiler-rt
+#ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
 
-rm -rf `pwd`/tools/polly
-ln -s `pwd`/polly `pwd`/tools/polly
+#rm -rf `pwd`/tools/polly
+#ln -s `pwd`/polly `pwd`/tools/polly
 
 #rm -rf `pwd`/tools/clang/tools/extra
 #ln -s `pwd`/clang-tools-extra `pwd`/tools/clang/tools/extra
 
-rm -rf `pwd`/projects/compiler-rt
-ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
+#rm -rf `pwd`/projects/compiler-rt
+#ln -s `pwd`/compiler-rt `pwd`/projects/compiler-rt
 
-rm -rf `pwd`/tools/polly
-ln -s `pwd`/polly `pwd`/tools/polly
+#rm -rf `pwd`/tools/polly
+#ln -s `pwd`/polly `pwd`/tools/polly
 
-rm -rf `pwd`/tools/lld
-ln -s `pwd`/lld `pwd`/tools/lld
+#rm -rf `pwd`/tools/lld
+#ln -s `pwd`/lld `pwd`/tools/lld
 
 #rm -rf `pwd`/tools/lldb
 #ln -s `pwd`/lldb `pwd`/tools/lldb

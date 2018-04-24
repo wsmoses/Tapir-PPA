@@ -1,3 +1,9 @@
+tapir-toolchain-5.0 (1:5.0.0-4ubuntu2) xenial; urgency=medium
+
+  * trying to get working
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 24 Apr 2018 14:48:13 -0400
+
 tapir-toolchain-5.0 (1:5.0.0-4ubuntu1) xenial; urgency=medium
 
   * Initial Tapir Packaging
