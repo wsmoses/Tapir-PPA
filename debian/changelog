@@ -1,4 +1,10 @@
-tapir-toolchain-5.0 (1:5.0.0_0-4ubuntu1) xenial; urgency=medium
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc50709-1~exp1) experimental; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 12:33:49 -0400
+
+tapir-toolchain (1:5.0~git0000-1~exp1) experimental; urgency=medium
 
   * Initial Tapir Packaging
 
