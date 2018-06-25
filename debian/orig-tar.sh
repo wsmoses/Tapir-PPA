@@ -7,9 +7,8 @@ set -o xtrace
 # To create an rc1 release:
 # sh 4.0/debian/orig-tar.sh RELEASE_40 rc1
 
+PACKAGE_NAME="tapir-toolchain-5.0"
 MAJOR_VERSION=5.0
-CURRENT_VERSION=5.0 # Should be changed to 3.5.1 later
-EXACT_VERSION=5.0.0_0
 LLVM_VER="release_50"
 
 if test -n "$1"; then
@@ -23,93 +22,68 @@ cd ..
 
 SVN_ARCHIVES=git-archives
 
-checkout_sources() {
+update_source() {
     PROJECT=$1
     URL=$2
-    TARGET=$3
-    BRANCH=$4
+    BRANCH=$3
     if test -z "$BRANCH"; then
         BRANCH=master
     fi
-    echo "$PROJECT / $URL / $BRANCH / $TARGET"
+    echo "$PROJECT / $URL / $BRANCH"
 
     cd $SVN_ARCHIVES/
-    DEST=$PROJECT-$BRANCH
-    if test -d $DEST; then
-        cd $DEST
+    if test -d $PROJECT; then
+        cd $PROJECT
         git fetch origin $BRANCH
         git checkout origin/$BRANCH
         cd ..
     else
-        git clone $2 $DEST -b $BRANCH
+        git clone $2 $PROJECT -b $BRANCH
     fi
-    rm -rf ../$TARGET
-    rsync -r --exclude=.git $DEST/ ../$TARGET
     cd ..
 }
 
-VERSION=$MAJOR_VERSION"_"$EXACT_VERSION
-FULL_VERSION="tapir-toolchain-"$VERSION
-MED_VERSION="tapir-toolchain-"$MAJOR_VERSION
-
 mkdir -p $SVN_ARCHIVES
+update_source llvm https://github.com/wsmoses/Tapir-LLVM
+update_source clang https://github.com/wsmoses/Tapir-Clang
+update_source clang-tools-extra https://github.com/llvm-mirror/clang-tools-extra $LLVM_VER
+update_source compiler-rt https://github.com/wsmoses/Tapir-Compiler-RT
+update_source polly https://github.com/wsmoses/Tapir-Polly
+update_source lld https://github.com/llvm-mirror/lld $LLVM_VER
 
-# LLVM
-LLVM_TARGET=$FULL_VERSION
-checkout_sources llvm https://github.com/wsmoses/Tapir-LLVM $LLVM_TARGET
-tar jcf $FULL_VERSION.orig.tar.bz2 $LLVM_TARGET
-rm -f $MED_VERSION.orig.tar.bz2
-ln -s $FULL_VERSION.orig.tar.bz2 $MED_VERSION.orig.tar.bz2
-rm -rf $LLVM_TARGET
+EXACT_VERSION=~`cat $SVN_ARCHIVES/llvm/.git/HEAD)`
+VERSION=$MAJOR_VERSION$EXACT_VERSION
+FULL_VERSION="$PACKAGE_NAME-"$VERSION
+MED_VERSION="$PACKAGE_NAME-"$MAJOR_VERSION
 
+compress_source() {
+    PROJECT=$1
+    if [ "$PROJECT" = "llvm" ]; then
+      TARGET="$FULL_VERSION"
+      ORIG="orig"
+    else
+      TARGET="$PROJECT"_"$VERSION"
+      ORIG="orig-$PROJECT"
+    fi
 
-# Clang
-CLANG_TARGET=clang_$VERSION
-checkout_sources clang https://github.com/wsmoses/Tapir-Clang $CLANG_TARGET
-tar jcf $FULL_VERSION.orig-clang.tar.bz2 $CLANG_TARGET
-rm -f $MED_VERSION.orig-clang.tar.bz2
-ln -s $FULL_VERSION.orig-clang.tar.bz2 $MED_VERSION.orig-clang.tar.bz2
-rm -rf $CLANG_TARGET
+    cd $SVN_ARCHIVES/
+    rm -rf ../$TARGET
+    rsync -r --exclude=.git $PROJECT/ ../$TARGET
+    cd ..
 
-# Clang extra
-CLANG_TARGET=clang-tools-extra_$VERSION
-checkout_sources clang-tools-extra https://github.com/llvm-mirror/clang-tools-extra $CLANG_TARGET $LLVM_VER
-tar jcf $FULL_VERSION.orig-clang-tools-extra.tar.bz2 $CLANG_TARGET
-rm -f $MED_VERSION.orig-clang-tools-extra.tar.bz2
-ln -s $FULL_VERSION.orig-clang-tools-extra.tar.bz2 $MED_VERSION.orig-clang-tools-extra.tar.bz2
-rm -rf $CLANG_TARGET
+    tar jcf $FULL_VERSION.$ORIG.tar.bz2 $TARGET
+    rm -f $MED_VERSION.$ORIG.tar.bz2
+    ln -s $FULL_VERSION.$ORIG.tar.bz2 $MED_VERSION.$ORIG.tar.bz2
+    rm -rf $TARGET
+}
 
-# Compiler-rt
-COMPILER_RT_TARGET=compiler-rt_$VERSION
-checkout_sources compiler-rt https://github.com/wsmoses/Tapir-Compiler-RT $COMPILER_RT_TARGET
-tar jcf $FULL_VERSION.orig-compiler-rt.tar.bz2 $COMPILER_RT_TARGET
-rm -f $MED_VERSION.orig-compiler-rt.tar.bz2
-ln -s $FULL_VERSION.orig-compiler-rt.tar.bz2 $MED_VERSION.orig-compiler-rt.tar.bz2
-rm -rf $COMPILER_RT_TARGET
-
-# Polly
-POLLY_TARGET=polly_$VERSION
-checkout_sources polly https://github.com/wsmoses/Tapir-Polly $POLLY_TARGET
-tar jcf $FULL_VERSION.orig-polly.tar.bz2 $POLLY_TARGET
-rm -f $MED_VERSION.orig-polly.tar.bz2
-ln -s $FULL_VERSION.orig-polly.tar.bz2 $MED_VERSION.orig-polly.tar.bz2
-rm -rf $POLLY_TARGET
-
-# LLD
-LLD_TARGET=lld_$VERSION
-checkout_sources lld https://github.com/llvm-mirror/lld $LLD_TARGET $LLVM_VER
-tar jcf $FULL_VERSION.orig-lld.tar.bz2 $LLD_TARGET
-rm -f $MED_VERSION.orig-lld.tar.bz2
-ln -s $FULL_VERSION.orig-lld.tar.bz2 $MED_VERSION.orig-lld.tar.bz2
-rm -rf $LLD_TARGET
-
-# LLDB
-#LLDB_TARGET=lldb_$VERSION
-#checkout_sources lldb https://github.com/llvm-mirror/lldb $LLDB_TARGET $LLVM_VER
-#tar jcf $FULL_VERSION.orig-lldb.tar.bz2 $LLDB_TARGET
-#rm -f $MED_VERSION.orig-lldb.tar.bz2
-#ln -s $FULL_VERSION.orig-lldb.tar.bz2 $MED_VERSION.orig-lldb.tar.bz2
-#rm -rf $LLDB_TARGET
+compress_source llvm
+compress_source clang
+compress_source clang-tools-extra
+compress_source compiler-rt
+compress_source polly
+compress_source lld
+#compress_source lldb
 
 PATH_DEBIAN="$(pwd)/$(dirname $0)/../"
 echo "going into $PATH_DEBIAN"
