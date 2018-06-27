@@ -1,10 +1,130 @@
-tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc50709-1~exp1) experimental; urgency=medium
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc5070914-1~exp2) xenial; urgency=medium
 
   * New snapshot release
 
- -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 12:33:49 -0400
+ -- William S. Moses <deb@wsmoses.com>  Wed, 27 Jun 2018 11:39:55 -0400
 
-tapir-toolchain (1:5.0~git0000-1~exp1) experimental; urgency=medium
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc5070913-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 17:42:48 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc5070912-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 16:10:52 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc5070911-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 15:45:42 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc5070910-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 14:24:52 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507099-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 13:23:15 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507098-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 13:18:50 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507098-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 13:07:14 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507098-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 12:55:55 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507097-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Tue, 26 Jun 2018 00:02:51 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507096-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 23:44:55 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507096-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 22:51:56 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507095-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 21:09:14 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507095-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 19:45:47 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507094-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 17:13:00 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507093-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 16:14:14 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507092-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 16:03:55 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507091-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 15:55:17 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc507090-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 14:52:24 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc50709-1~exp2) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 14:31:52 -0400
+
+tapir-toolchain (1:5.0~gitba2f0eda34108ab64e581f2740b4d06eecc50709-1~exp1) xenial; urgency=medium
+
+  * New snapshot release
+
+ -- William S. Moses <deb@wsmoses.com>  Mon, 25 Jun 2018 12:50:34 -0400
+
+tapir-toolchain (1:5.0~git0000-1~exp1) xenial; urgency=medium
 
   * Initial Tapir Packaging
 

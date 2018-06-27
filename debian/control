@@ -1,4 +1,4 @@
-Source: tapir-toolchain-5.0
+Source: tapir-toolchain
 Section: devel
 Priority: optional
 Maintainer: William S. Moses <deb@wsmoses.com>
@@ -10,6 +10,7 @@ Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect,
     libjsoncpp-dev, pkg-config,
     lcov, procps, help2man, zlib1g-dev, libsnappy-dev,
     g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32],
+    libjs-mathjax
 #    ocaml-nox [amd64 arm64 armel armhf i386],
 #    ocaml-findlib [amd64 arm64 armel armhf i386],
 #    libctypes-ocaml-dev [amd64 arm64 armel armhf i386],
@@ -20,15 +21,16 @@ Homepage: http://www.llvm.org/
 
 # ------------- clang -------------
 
-Package: clang-5.0
+Package: tapirclang-5.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
- ${dep:devlibs-objc}, libclang-common-5.0-dev (= ${binary:Version}),
- libclang1-5.0 (= ${binary:Version}), libc6-dev, binutils
-Provides: c-compiler, objc-compiler, c++-compiler
+ ${dep:devlibs-objc}, libtapirclang-common-5.0-dev (= ${binary:Version}),
+ libtapirclang1-5.0 (= ${binary:Version}), libc6-dev, binutils
+Provides: c-compiler, objc-compiler, c++-compiler, clang-5.0
 Recommends: llvm-5.0-dev, python, libomp-dev
 Suggests: gnustep, gnustep-devel, clang-5.0-doc
-Replaces: clang-include-fixer-5.0
+Replaces: clang-include-fixer-5.0, clang-5.0
+Conflicts: clang-5.0
 Breaks: clang-include-fixer-5.0
 Description: C, C++ and Objective-C compiler
  Clang project is a C, C++, Objective C and Objective C++ front-end
@@ -38,9 +40,11 @@ Description: C, C++ and Objective-C compiler
  Clang implements all of the ISO C++ 1998, 11 and 14 standards and also
  provides most of the support of C++17.
 
-Package: clang-tools-5.0
+Package: tapirclang-tools-5.0
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, tapirclang-5.0 (= ${binary:Version})
+Replaces: clang-tools-5.0
+Conflicts: clang-tools-5.0
 Description: clang-based tools
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -52,10 +56,13 @@ Description: clang-based tools
  This package contains some clang-based tools like scan-build, clangd,
  clang-cl, etc.
 
-Package: clang-format-5.0
+Package: tapirclang-format-5.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- libllvm5.0 (= ${binary:Version})
+ libtapirllvm5.0 (= ${binary:Version})
+Replaces: clang-format-5.0
+Conflicts: clang-format-5.0
+Provides: clang-format-5.0
 Description: Tool to format C/C++/Obj-C code
  Clang-format is both a library and a stand-alone tool with the goal of
  automatically reformatting C++ sources files according to configurable
@@ -68,22 +75,27 @@ Description: Tool to format C/C++/Obj-C code
  .
  This package also provides vim and emacs plugins.
 
-Package: clang-tidy-5.0
+Package: tapirclang-tidy-5.0
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- libllvm5.0 (= ${binary:Version})
-Replaces: clang-modernize-5.0, clang-5.0 (<< 1:5.0~svn250696-1)
-Breaks: clang-modernize-5.0, clang-5.0 (<< 1:5.0~svn250696-1)
+ libtapirllvm5.0 (= ${binary:Version})
+Replaces: tapirclang-modernize-5.0, tapirclang-5.0 (<< 1:5.0~svn250696-1), clang-tidy-5.0
+Conflicts: clang-tidy-5.0
+Provides: clang-tidy-5.0
+Breaks: tapirclang-modernize-5.0, tapirclang-5.0 (<< 1:5.0~svn250696-1)
 Description: clang-based C++ linter tool
  Provide an extensible framework for diagnosing and fixing typical programming
  errors, like style violations, interface misuse, or bugs that can be deduced
  via static analysis. clang-tidy is modular and provides a convenient interface
  for writing new checks.
 
-Package: clang-5.0-doc
+Package: tapirclang-5.0-doc
 Architecture: all
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: clang-5.0-doc
+Replaces: clang-5.0-doc
+Provides: clang-5.0-doc
 Description: C, C++ and Objective-C compiler - Documentation
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -94,7 +106,10 @@ Description: C, C++ and Objective-C compiler - Documentation
  .
  This package contains the documentation.
 
-Package: libclang1-5.0
+Package: libtapirclang1-5.0
+Conflicts: libclang1-5.0
+Provides: libclang1-5.0
+Replaces: libclang1-5.0
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -116,12 +131,15 @@ Description: C interface to the clang library
  locations with elements within the AST, and other facilities that support
  Clang-based development tools.
 
-Package: libclang1-5.0-dbg
+Package: libtapirclang1-5.0-dbg
 Architecture: any
 Multi-Arch: same
 Section: debug
 Priority: optional
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libclang1-5.0 (= ${binary:Version})
+Conflicts: libclang1-5.0-dbg
+Provides: libclang1-5.0-dbg
+Replaces: libclang1-5.0-dbg
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs}, libtapirclang1-5.0 (= ${binary:Version})
 Description: clang library (debug)
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -132,9 +150,12 @@ Description: clang library (debug)
  .
  This package contains the debugging symbols.
 
-Package: libclang-5.0-dev
+Package: libtapirclang-5.0-dev
 Architecture: any
 Section: libdevel
+Provides: libclang-5.0-dev
+Replaces: libclang-5.0-dev
+Conflicts: libclang-5.0-deb
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dep:devlibs},
  ${dep:devlibs-objc}, libclang1-5.0 (= ${binary:Version}),
  libclang-common-5.0-dev (= ${binary:Version})
@@ -149,10 +170,13 @@ Description: clang library - Development package
  This package contains the clang headers to develop extensions over
  libclang1-5.0.
 
-Package: libclang-common-5.0-dev
+Package: libtapirclang-common-5.0-dev
 Architecture: any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version})
+Provides: libclang-common-5.0-dev
+Conflicts: libclang-common-5.0-dev
+Replaces: libclang-common-5.0-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libtapirllvm5.0 (= ${binary:Version})
 Description: clang library - Common development package
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -165,10 +189,13 @@ Description: clang library - Common development package
  (profiling, etc).
 
 
-Package: libfuzzer-5.0-dev
+Package: libtapirfuzzer-5.0-dev
 Architecture: linux-any
 Section: libdevel
-Depends: ${shlibs:Depends}, ${misc:Depends}, clang-5.0 (= ${binary:Version})
+Provides: libfuzzer-5.0-dev
+Conflicts: libfuzzer-5.0-dev
+Replaces: libfuzzer-5.0-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, tapirclang-5.0 (= ${binary:Version})
 Description: Library for coverage-guided fuzz testing
  LibFuzzer is a library for in-process, coverage-guided, evolutionary fuzzing
  of other libraries.
@@ -186,14 +213,14 @@ Description: Library for coverage-guided fuzz testing
  instrumentation.
 
 
-Package: python-clang-5.0
+Package: python-tapirclang-5.0
 Section: python
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python
-Replaces: python-clang-3.8, python-clang-3.9, python-clang-x.y
+Replaces: python-clang-3.8, python-clang-3.9, python-clang-x.y, python-clang-5.0
 Breaks: python-clang-3.8, python-clang-3.9
-Conflicts: python-clang-x.y
-Provides: python-clang-x.y
+Conflicts: python-clang-x.y, python-clang-5.0
+Provides: python-clang-x.y, python-clang-5.0
 Description: Clang Python Bindings
  Clang project is a C, C++, Objective C and Objective C++ front-end
  based on the LLVM compiler. Its goal is to offer a replacement to the
@@ -205,7 +232,10 @@ Description: Clang Python Bindings
  This binding package provides access to the Clang compiler and libraries.
 
 
-Package: clang-5.0-examples
+Package: tapirclang-5.0-examples
+Replaces: clang-5.0-examples
+Conflicts: clang-5.0-examples
+Provides: clang-5.0-examples
 Architecture: any
 Section: doc
 Depends: ${shlibs:Depends}, ${misc:Depends}
@@ -221,14 +251,16 @@ Description: Clang examples
 
 # ------------- LLVM -------------
 
-Package: libllvm5.0
+Package: libtapirllvm5.0
 Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Breaks: libllvm3.9v4
-Replaces: libllvm3.9v4
+Replaces: libllvm3.9v4, libllvm5.0
+Conflicts: libllvm5.0
+Provides: libllvm5.0
 Description: Modular compiler and toolchain technologies, runtime library
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -236,15 +268,17 @@ Description: Modular compiler and toolchain technologies, runtime library
  .
  This package contains the LLVM runtime library.
 
-Package: libllvm5.0-dbg
+Package: libtapirllvm5.0-dbg
 Architecture: any
 Section: debug
 Priority: optional
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libtapirllvm5.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Breaks: libllvm3.9v4-dbg
-Replaces: libllvm3.9v4-dbg
+Replaces: libllvm3.9v4-dbg, libllvm5.0-dbg
+Conflicts: libllvm5.0-dbg
+Provides: libllvm5.0-dbg
 Description: Modular compiler and toolchain technologies, debugging libraries
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -252,11 +286,14 @@ Description: Modular compiler and toolchain technologies, debugging libraries
  .
  This package contains the LLVM runtime library debug symbols.
 
-Package: llvm-5.0
+Package: tapirllvm-5.0
 Architecture: any
-Suggests: llvm-5.0-doc
-Depends: llvm-5.0-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Recommends: llvm-5.0-dev
+Suggests: tapirllvm-5.0-doc
+Depends: tapirllvm-5.0-runtime (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Recommends: tapirllvm-5.0-dev
+Conflicts: llvm-5.0
+Provides: llvm-5.0
+Replaces: llvm-5.0
 Description: Modular compiler and toolchain technologies
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -280,11 +317,12 @@ Description: Modular compiler and toolchain technologies
  a young scheme front-end, and Java support is in development. LLVM can
  generate code for X86, SparcV9, PowerPC or many other architectures.
 
-Package: llvm-5.0-runtime
+Package: tapirllvm-5.0-runtime
 Architecture: any
 Depends: binfmt-support, ${shlibs:Depends}, ${misc:Depends}
-Conflicts: llvm (<< 2.7-1)
-Replaces: llvm (<< 2.7-1)
+Conflicts: llvm (<< 2.7-1), llvm-5.0-runtime
+Replaces: llvm (<< 2.7-1), llvm-5.0-runtime
+Provides: llvm-5.0-runtime
 Description: Modular compiler and toolchain technologies, IR interpreter
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -301,11 +339,13 @@ Description: Modular compiler and toolchain technologies, IR interpreter
  This package provides the minimal required to execute programs in LLVM
  format.
 
-Package: llvm-5.0-dev
+Package: tapirllvm-5.0-dev
 Architecture: any
 Depends: ${shlibs:Depends}, libffi-dev (>= 3.0.9), ${misc:Depends},
- llvm-5.0 (= ${binary:Version}), libllvm5.0 (= ${binary:Version}), libtinfo-dev
-Replaces: llvm (<< 2.2-3)
+ tapirllvm-5.0 (= ${binary:Version}), libtapirllvm5.0 (= ${binary:Version}), libtinfo-dev
+Replaces: llvm (<< 2.2-3), llvm-5.0-dev
+Conflicts: llvm-5.0-dev
+Provides: llvm-5.0-dev
 Description: Modular compiler and toolchain technologies, libraries and headers
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -322,10 +362,13 @@ Description: Modular compiler and toolchain technologies, libraries and headers
  This package provides the libraries and headers to develop applications
  using llvm.
 
-Package: llvm-5.0-tools
+Package: tapirllvm-5.0-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, python,
- llvm-5.0-dev (= ${binary:Version}), libsnappy-dev
+ tapirllvm-5.0-dev (= ${binary:Version}), libsnappy-dev
+Provides: llvm-5.0-tools
+Conflicts: llvm-5.0-tools
+Replaces: llvm-5.0-tools
 Description: Modular compiler and toolchain technologies, tools
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -364,10 +407,13 @@ Description: Modular compiler and toolchain technologies, tools
 #  .
 #  This package provides the OCaml bindings to develop applications using llvm.
 
-Package: llvm-5.0-doc
+Package: tapirllvm-5.0-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}, libjs-jquery, libjs-underscore
+Conflicts: llvm-5.0-doc
+Replaces: llvm-5.0-doc
+Provides: llvm-5.0-doc
 Description: Modular compiler and toolchain technologies, documentation
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -383,10 +429,13 @@ Description: Modular compiler and toolchain technologies, documentation
  .
  This package contains all documentation (extensive).
 
-Package: llvm-5.0-examples
+Package: tapirllvm-5.0-examples
 Section: doc
 Architecture: all
-Depends: ${misc:Depends}, llvm-5.0-dev (>= ${source:Version}), llvm-5.0-dev (<< ${source:Version}+c~)
+Depends: ${misc:Depends}, tapirllvm-5.0-dev (>= ${source:Version}), tapirllvm-5.0-dev (<< ${source:Version}+c~)
+Conflicts: llvm-5.0-examples
+Provides: llvm-5.0-examples
+Replaces: llvm-5.0-examples
 Description: Modular compiler and toolchain technologies, examples
  LLVM is a collection of libraries and tools that make it easy to build
  compilers, optimizers, just-in-time code generators, and many other
@@ -406,21 +455,27 @@ Description: Modular compiler and toolchain technologies, examples
 
 # ------------- lld -------------
 
-Package: lld-5.0
+Package: tapirlld-5.0
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version}), llvm-5.0-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, libtapirllvm5.0 (= ${binary:Version}), tapirllvm-5.0-dev
+Conflicts: lld-5.0
+Replaces: lld-5.0
+Provides: lld-5.0
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker
  LLD is a new, high-performance linker. It is built as a set of reusable
  components which highly leverage existing libraries in the larger LLVM
  Project.
 
-Package: liblld-5.0
+Package: libtapirlld-5.0
 Architecture: amd64 armel armhf i386  kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, libllvm5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, libtapirllvm5.0 (= ${binary:Version})
 Pre-Depends: ${misc:Pre-Depends}
+Replaces: liblld-5.0
+Conflicts: liblld-5.0
+Provides: liblld-5.0
 Section: libs
 Description: LLVM-based linker, library
  LLD is a new, high-performance linker. It is built as a set of reusable
@@ -444,12 +499,15 @@ Description: LLVM-based linker, library
 #  This package contains the LLD runtime library debug symbols.
 
 
-Package: liblld-5.0-dev
+Package: libtapirlld-5.0-dev
 Section: libdevel
 Architecture: amd64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 s390 sparc alpha hppa m68k powerpcspe ppc64 sh4 sparc64 x32 mips mipsel
 # ia64 mips mipsel hurd powerpc ppc64el have been removed
-Depends: ${shlibs:Depends}, ${misc:Depends}, lld-5.0 (= ${binary:Version}),
- liblld-5.0 (= ${binary:Version})
+Depends: ${shlibs:Depends}, ${misc:Depends}, tapirlld-5.0 (= ${binary:Version}),
+ libtapirlld-5.0 (= ${binary:Version})
+Conflicts: liblld-5.0-dev
+Replaces: liblld-5.0-dev
+Provides: liblld-5.0-dev
 Pre-Depends: ${misc:Pre-Depends}
 Description: LLVM-based linker, header files
  LLD is a new, high-performance linker. It is built as a set of reusable

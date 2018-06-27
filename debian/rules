@@ -224,9 +224,20 @@ override_dh_auto_configure: preconfigure
 	fi)
 
 	# Due to bug upstream, no symlink here
-	rm -fr tools/clang/tools/extra
-	mkdir -p tools/clang/tools
-	cp -R -H clang-tools-extra tools/clang/tools/extra
+	ln -s `pwd`/clang tools/clang
+	ln -s `pwd`/polly tools/polly
+	ln -s `pwd`/lld tools/lld
+	ln -s `pwd`/compiler-rt projects/compiler-rt
+	mkdir -p clang/tools
+	if [ -h tools/clang/tools/extra ]; then echo "tools/clang/tools/extra symlink"; rm tools/clang/tools/extra; fi
+	if [ -h clang/tools/extra ]; then echo "clang/tools/extra symlink"; rm clang/tools/extra; fi
+	if [ -d tools/clang/tools/extra ] && [ -z "$(shell ls -A tools/clang/tools/extra)" ]; then echo "tools/clang/tools/extra Empty"; rmdir tools/clang/tools/extra; else echo "tools/clang/tools/extra Not Empty"; fi
+	if [ -d clang/tools/extra ] && [ -z "$(shell ls -A clang/tools/extra)" ]; then echo "clang/tools/extra Empty"; rmdir clang/tools/extra; else echo "clang/tools/extra Not Empty"; fi
+	ls -all .
+	ls -all tools
+	ls -all clang/tools
+	rm -fr clang/tools/extra
+	cp -R -H clang-tools-extra clang/tools/extra
 
 	echo "Running tests: $(RUN_TEST)"
 
@@ -248,6 +259,7 @@ override_dh_auto_configure: preconfigure
 	-DLLVM_INSTALL_UTILS=ON \
 	-DLLVM_VERSION_SUFFIX= \
 	-DLLVM_ENABLE_SPHINX=ON \
+    -DSPHINX_OUTPUT_HTML=YES \
 	-DSPHINX_WARNINGS_AS_ERRORS=OFF \
 	-DLLVM_BUILD_LLVM_DYLIB=ON \
 	-DLLVM_ENABLE_RTTI=ON \
@@ -280,6 +292,7 @@ build_doc:
 # Continue if failing, Ubuntu precise cannot generate manpages as sphinx is too old
 	#-(cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man)
 	cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-clang-html docs-clang-tools-html docs-polly-html docs-polly-man docs-clang-tools-man docs-clang-man docs-llvm-man
+	#cd $(TARGET_BUILD) && make $(NJOBS) docs-llvm-html docs-llvm-man
 
 # Rename manpages
 	d=$(CURDIR)/docs/_build/man/; \
@@ -300,10 +313,11 @@ build_doc:
 	help2man --version-string=$(LLVM_VERSION) clang/tools/scan-view/bin/scan-view > debian/man/scan-view-$(LLVM_VERSION).1
 	help2man --version-string=$(LLVM_VERSION) clang/tools/clang-format/clang-format-diff.py > debian/man/clang-format-diff-$(LLVM_VERSION).1
 
+		#LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot 
 	CMDS="llvm-dwarfdump llvm-mc llvm-mcmarkup llvm-objdump llvm-rtdyld llvm-size llvm-ranlib clang-format clang clang++ clang-tblgen clang-check clang-cpp clang-import-test clang-tidy clang-apply-replacements clang-rename clang-query pp-trace sancov lli modularize clang-include-fixer find-all-symbols clang-reorder-fields ld.lld llvm-tblgen clang-change-namespace clang-offload-bundler"; \
 	for f in $$CMDS; do \
 		echo "Generating manpage of $$f"; \
-		LD_LIBRARY_PATH=$(DEB_INST)/usr/lib/llvm-$(LLVM_VERSION)/lib/:/usr/lib/*/libfakeroot help2man --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
+        help2man --version-string=$(LLVM_VERSION) $(TARGET_BUILD)/bin/$$f > debian/man/$$f-$(LLVM_VERSION).1; \
 	done
 
 override_dh_auto_install:

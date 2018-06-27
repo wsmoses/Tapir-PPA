@@ -51,7 +51,7 @@ update_source compiler-rt https://github.com/wsmoses/Tapir-Compiler-RT
 update_source polly https://github.com/wsmoses/Tapir-Polly
 update_source lld https://github.com/llvm-mirror/lld $LLVM_VER
 
-EXACT_VERSION=`cd $SVN_ARCHIVES/llvm && git rev-parse HEAD`
+EXACT_VERSION=`cd $SVN_ARCHIVES/llvm && git rev-parse HEAD`14
 VERSION=$MAJOR_VERSION~git$EXACT_VERSION
 FULL_VERSION="$PACKAGE_NAME"_"$VERSION"
 MED_VERSION="$PACKAGE_NAME-"$MAJOR_VERSION
@@ -92,7 +92,7 @@ export DEBEMAIL="deb@wsmoses.com"
 cd $PATH_DEBIAN
 
 cd $dir
-dch --distribution experimental --newversion 1:$VERSION-1~exp1 "New snapshot release"
+dch --distribution xenial --newversion 1:$VERSION-1~exp2 "New snapshot release"
 #$EXTRA_DCH_FLAGS --distribution $DISTRIBUTION --newversion 1:$VERSION-1~exp1 "New snapshot release"
 
 tar jxf ../$FULL_VERSION.orig.tar.bz2 --strip-components=1
