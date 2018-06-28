@@ -51,7 +51,7 @@ update_source compiler-rt https://github.com/wsmoses/Tapir-Compiler-RT
 update_source polly https://github.com/wsmoses/Tapir-Polly
 update_source lld https://github.com/llvm-mirror/lld $LLVM_VER
 
-EXACT_VERSION=`cd $SVN_ARCHIVES/llvm && git rev-parse HEAD`14
+EXACT_VERSION=`cd $SVN_ARCHIVES/llvm && git rev-parse HEAD`19
 VERSION=$MAJOR_VERSION~git$EXACT_VERSION
 FULL_VERSION="$PACKAGE_NAME"_"$VERSION"
 MED_VERSION="$PACKAGE_NAME-"$MAJOR_VERSION
